@@ -1,0 +1,2 @@
+Line 1 using fd
+Line 2 using fd_dup

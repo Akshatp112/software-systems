@@ -21,7 +21,7 @@ int main() {
     close(fd);
 
     // Now try opening with O_EXCL along with O_CREAT
-    fd = open("myfile.txt", O_RDWR | O_CREAT | O_EXCL, 0644);
+    fd = open("myfile2.txt", O_RDWR | O_CREAT | O_EXCL, 0644);
 
     if (fd < 0) {
         perror("open with O_EXCL");

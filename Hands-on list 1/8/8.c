@@ -12,6 +12,8 @@ Close the file when end of file is reached.
 int main() {
     int fd;
     char c;
+    int i = 0;
+    char line[100];
 
     // Open file in read-only mode
     fd = open("file.txt", O_RDONLY);
@@ -22,7 +24,11 @@ int main() {
 
     // Read file character by character
     while (read(fd, &c, BUF_SIZE) > 0) {
-        write(1, &c, 1);  // print character to stdout
+        line[i++] = c;
+	if( c == '\n' ){
+	    write(1, line, i);  // print character to stdout
+    	    i = 0;
+	}
     }
 
     close(fd);
