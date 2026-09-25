@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
     if (pid > 0) {
-        printf("Daemon started with PID %d\n", pid);
+        printf("Daemon started with PID %d\n", pid); //child pid
         exit(0);
     }
 
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
         struct tm *t = localtime(&now);
 
         if (t->tm_hour == target_hour && t->tm_min == target_min) {
-            system("/path/to/your/script.sh");  // <-- Replace with your script path
+            system("bash '/home/aksht/software-systems/Hands-on list 1/30/myscript.sh'");  // <-- Replace with your script path
             sleep(60);  // wait 1 min so it doesn’t run multiple times
         }
 
@@ -53,10 +53,18 @@ int main(int argc, char *argv[]) {
 
 aksht@HP-Pavilion:~/software-systems/Hands-on list 1/30$ gcc 30.c
 
-aksht@HP-Pavilion:~/software-systems/Hands-on list 1/30$ ./a.out
-Usage: ./a.out <HH> <MM>
+aksht@HP-Pavilion:~/software-systems/Hands-on list 1/30$ nano myscript.sh
 
-aksht@HP-Pavilion:~/software-systems/Hands-on list 1/30$ ./a.out 21 15
-Daemon started with PID 2578
+aksht@HP-Pavilion:~/software-systems/Hands-on list 1/30$ ./myscript.sh
+
+aksht@HP-Pavilion:~/software-systems/Hands-on list 1/30$ ./a.out 19 08
+Daemon started with PID 3327
+
+aksht@HP-Pavilion:~/software-systems/Hands-on list 1/30$ cat /tmp/output.txt
+Script executed at Fri Sep 25 18:55:31 UTC 2026
+Script executed at Fri Sep 25 18:56:27 UTC 2026
+Script executed at Fri Sep 25 19:05:28 UTC 2026
+Script executed at Fri Sep 25 19:06:47 UTC 2026
+Script executed at Fri Sep 25 19:08:05 UTC 2026
 
 */

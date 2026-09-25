@@ -46,7 +46,7 @@ int main()
 
     tickets++;
 
-    lseek(fd, 0, SEEK_SET);
+    lseek(fd, 0, SEEK_SET); //moving offset to start
 
     if (write(fd, &tickets, sizeof(int)) != sizeof(int))
     {

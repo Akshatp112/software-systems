@@ -19,7 +19,7 @@ int main() {
     } else {
         // Parent process sleeps to keep child zombie
         printf("Parent process sleeping. PID = %d\n", getpid());
-        sleep(30); // Check zombie using `ps -l`
+        sleep(30); // Check zombie using `ps -l | grep 22`
     }
 
     return 0;
