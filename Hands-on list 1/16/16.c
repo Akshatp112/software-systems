@@ -38,14 +38,20 @@ int main(int argc, char **argv) {
     } else if (mode == 'r') {
         if (lock_region(fd, F_RDLCK) < 0) perror("F_RDLCK");
         else printf("Read lock acquired on %s\n", argv[1]);
-    } else if (mode == 'u') {
-        if (lock_region(fd, F_UNLCK) < 0) perror("F_UNLCK");
-        else printf("Lock released on %s\n", argv[1]);
     } else {
         fprintf(stderr, "mode must be r/w/u\n");
     }
 
-    pause(); // keep lock until terminated
+
+    printf("\n Press Enter to release the lock.. \n");
+    getchar();
+    getchar();
+
+    if(lock_region(fd, F_UNLCK)<0)
+        perror("unlock");
+    else
+        printf("Lock released.\n");
+
     close(fd);
     return 0;
 }
@@ -58,6 +64,8 @@ aksht@HP-Pavilion:~/software-systems/Hands-on list 1/16$ gcc 16.c -o lock
 
 aksht@HP-Pavilion:~/software-systems/Hands-on list 1/16$ ./lock test.txt w
 Write lock acquired on test.txt
+
+ Press Enter to release the lock..
 
    -> program waits here (pause)
 
@@ -73,11 +81,17 @@ Terminal 1: release lock
 
 aksht@HP-Pavilion:~/software-systems/Hands-on list 1/16$ ./lock test.txt w
 Write lock acquired on test.txt
-^C
+
+ Press Enter to release the lock..
+
+Lock released.
 
 
 Terminal 2: read lock acquired
 
 aksht@HP-Pavilion:~/software-systems/Hands-on list 1/16$ ./lock test.txt r
 Read lock acquired on test.txt
+
+ Press Enter to release the lock..
+
 */
